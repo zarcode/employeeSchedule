@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+/functions/node_modules
 
 # testing
 /coverage
@@ -22,3 +23,7 @@ yarn-error.log*
 
 # editor
 .idea
+
+# config
+/functions/config.js
+/functions/employee-schedule-fb-key.json
