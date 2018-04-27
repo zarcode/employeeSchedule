@@ -1,4 +1,4 @@
-// @flow
+/* @flow */
 import { createSelector } from 'reselect';
 import { combineReducers } from 'redux';
 import { ACTION } from '../constants';
@@ -13,12 +13,17 @@ const byId = (state = {}, action) => {
   return state;
 };
 
-const ids = (state = [], action) => {
+const ids = (state = {}, action) => {
   if (action.type === ACTION.FETCH_SHIFTS_SUCCESS) {
-    return [
-      ...state,
-      ...action.response.result,
-    ];
+    const oldState = state[action.startDate];
+    return {
+      ...oldState,
+      [action.startDate]: action.response.result,
+    };
+    // return [
+    //   ...state,
+    //   ...action.response.result,
+    // ];
   }
   return state;
 };
@@ -57,15 +62,15 @@ const shifts = combineReducers({
 export default shifts;
 
 // $FlowFixMe
-export const getById = state => state.photos.byId;
+export const getById = state => state.shifts.byId;
 // $FlowFixMe
-export const getIds = state => state.photos.ids;
+export const getIds = (state, startDate) => state.shifts.ids[startDate];
 // $FlowFixMe
-export const getIsFetching = state => state.photos.isFetching;
+export const getIsFetching = state => state.shifts.isFetching;
 // $FlowFixMe
-export const getErrorMessage = state => state.photos.errorMessage;
+export const getErrorMessage = state => state.shifts.errorMessage;
 
-export const getPhotos = createSelector(
+export const getShifts = createSelector(
   [getIds, getById],
-  (allIds, allbById) => allIds.map(id => allbById[id]),
+  (allIds, allbById) => allIds ? allIds.map(id => allbById[id]) : [],
 );

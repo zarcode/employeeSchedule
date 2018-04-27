@@ -1,4 +1,4 @@
-// @flow
+/* @flow */
 
 import logger from 'redux-logger';
 import { createStore, applyMiddleware } from 'redux';

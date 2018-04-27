@@ -1,4 +1,4 @@
-// @flow
+/* @flow */
 
 export const ACTION = {
   FETCH_SHIFTS_REQUESTED: 'FETCH_SHIFTS_REQUESTED',

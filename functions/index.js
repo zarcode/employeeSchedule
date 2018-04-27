@@ -1,5 +1,5 @@
 const functions = require('firebase-functions');
-
+const cors = require('cors')({origin: true});
 // // Create and Deploy Your First Cloud Functions
 // // https://firebase.google.com/docs/functions/write-firebase-functions
 //
@@ -17,16 +17,20 @@ admin.initializeApp({
 });
 
 exports.shifts = functions.https.onRequest(function(request, response) {
-  let startDate;
-  let endDate;
-  if('startDate' in request.query && 'endDate' in request.query) {
-    startDate = request.query.startDate;
-    endDate = request.query.endDate;
-  } else {
-    response.status(500).send({ message: "Required params are not provided" });
-  }
-  return admin.database().ref('shifts').orderByChild("date").startAt(startDate).endAt(endDate).once('value', (snapshot) => {
-    const event = snapshot.val();
-    response.send(event);
+  return cors(request, response, function() {
+    let startDate;
+    let endDate;
+    if ('startDate' in request.query && 'endDate' in request.query) {
+      startDate = request.query.startDate;
+      endDate = request.query.endDate;
+    } else {
+      response.status(500).send({ message: "Required params are not provided" });
+    }
+    return admin.database().ref('shifts').orderByChild("date").startAt(startDate).endAt(endDate).once('value', (snapshot) => {
+      console.log("snapshot", snapshot);
+      const event = snapshot.val();
+      console.log("event", event);
+      response.send(event || []);
+    });
   });
 });

@@ -1,4 +1,4 @@
-// @flow
+/* @flow */
 
 export type PromiseCancel<T> = {
   promise: Promise<T>,
@@ -34,5 +34,5 @@ export type FetchShiftsParams = {
 export type ApiMethod<Args, R> = (args: Args) => PromiseCancel<R>;
 
 export interface Api {
-  +fetchPhotos: ApiMethod<FetchShiftsParams, Array<Shift>>;
+  +fetchShifts: ApiMethod<FetchShiftsParams, Array<Shift>>;
 }
