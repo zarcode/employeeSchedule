@@ -20,17 +20,13 @@ const ids = (state = {}, action) => {
       ...oldState,
       [action.startDate]: action.response.result,
     };
-    // return [
-    //   ...state,
-    //   ...action.response.result,
-    // ];
   }
   return state;
 };
 
 const isFetching = (state = false, action) => {
   switch (action.type) {
-    case ACTION.FETCH_SHIFTS_REQUESTED:
+    case ACTION.FETCH_SHIFTS_LOADING:
       return true;
     case ACTION.FETCH_SHIFTS_SUCCESS:
     case ACTION.FETCH_SHIFTS_FAIL:
@@ -44,7 +40,7 @@ const errorMessage = (state = null, action) => {
   switch (action.type) {
     case ACTION.FETCH_SHIFTS_FAIL:
       return action.error;
-    case ACTION.FETCH_SHIFTS_REQUESTED:
+    case ACTION.FETCH_SHIFTS_LOADING:
     case ACTION.FETCH_SHIFTS_SUCCESS:
       return null;
     default:
@@ -72,5 +68,10 @@ export const getErrorMessage = state => state.shifts.errorMessage;
 
 export const getShifts = createSelector(
   [getIds, getById],
-  (allIds, allbById) => allIds ? allIds.map(id => allbById[id]) : [],
+  (allIds, allbById) => {
+    if (allIds) {
+      return allIds.map(id => allbById[id]);
+    }
+    return [];
+  },
 );

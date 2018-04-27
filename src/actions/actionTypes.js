@@ -1,10 +1,9 @@
 /* @flow */
 export type ShiftsAction =
   {
-    type: "FETCH_SHIFTS_REQUESTED",
-  } |
-  {
     type: "FETCH_SHIFTS_LOADING",
+    startDate: number,
+    endDate: number,
   } |
   {
     type: "FETCH_SHIFTS_FAIL",
@@ -19,7 +18,25 @@ export type ShiftsAction =
       },
       result: Array<number>
     },
-    startDate: string,
+    startDate: number,
   }
 
-export type Action = ShiftsAction;
+export type EmployeesAction =
+  {
+    type: "FETCH_EMPLOYEES_LOADING",
+  } |
+  {
+    type: "FETCH_EMPLOYEES_FAIL",
+    error: string,
+  } |
+  {
+    type: "FETCH_EMPLOYEES_SUCCESS",
+    response: {
+      entities: {
+        employees: any,
+      },
+      result: Array<number>
+    },
+  }
+
+export type Action = ShiftsAction | EmployeesAction;

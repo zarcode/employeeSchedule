@@ -34,3 +34,14 @@ exports.shifts = functions.https.onRequest(function(request, response) {
     });
   });
 });
+
+exports.employees = functions.https.onRequest(function(request, response) {
+  return cors(request, response, function() {
+    return admin.database().ref('employees').once('value', (snapshot) => {
+      console.log("snapshot", snapshot);
+      const event = snapshot.val();
+      console.log("event", event);
+      response.send(event || []);
+    });
+  });
+});

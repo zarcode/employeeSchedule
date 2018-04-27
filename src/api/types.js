@@ -27,12 +27,15 @@ export type Shift = {
 };
 
 export type FetchShiftsParams = {
-  startDate: string,
-  endDate: string,
+  startDate: number,
+  endDate: number,
 };
+
+export type FetchEmployeesParams = {};
 
 export type ApiMethod<Args, R> = (args: Args) => PromiseCancel<R>;
 
 export interface Api {
   +fetchShifts: ApiMethod<FetchShiftsParams, Array<Shift>>;
+  +fetchEmployees: ApiMethod<FetchEmployeesParams, Array<Employee>>;
 }

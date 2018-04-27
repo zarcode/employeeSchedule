@@ -7,8 +7,8 @@ import * as schema from './schema';
 import type { Shift } from '../api/types';
 
 export const shiftsLoading = (
-  startDate: string,
-  endDate: string,
+  startDate: number,
+  endDate: number,
 ): ShiftsAction =>
   ({
     type: ACTION.FETCH_SHIFTS_LOADING,
@@ -18,7 +18,7 @@ export const shiftsLoading = (
 
 export const shiftsSuccess = (
   response: Array<Shift>,
-  startDate: string,
+  startDate: number,
 ): ShiftsAction =>
   ({
     type: ACTION.FETCH_SHIFTS_SUCCESS,

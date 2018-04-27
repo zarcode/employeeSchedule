@@ -5,11 +5,13 @@ import * as moment from 'moment';
 import { bindActionCreators } from 'redux';
 
 import { shiftsLoading } from '../actions/shifts';
+import { employeesLoading } from '../actions/employees';
 import {
   getShifts,
   // getErrorMessage,
   // getLoadingState,
 } from '../reducers/shifts';
+import { getEmployees } from '../reducers/employees';
 
 const dateFormat = 'MM-DD-YYYY';
 const previewFormat = 'MMM D';
@@ -23,6 +25,7 @@ class ShiftTable extends Component {
     };
   }
   componentDidMount() {
+    this.props.actions.employeesLoading();
     this.loadMore(this.props.cDate);
   }
   componentWillReceiveProps(nextProps) {
@@ -67,6 +70,14 @@ class ShiftTable extends Component {
               {`${dayName}, ${moment(this.state.tableStartDate, dateFormat).add(index, 'days').format(previewFormat)}`}
             </div>
           ))}
+
+        {this.props.employees.map((employee) => (
+          <div
+            key={employee.id}
+          >
+            {employee.first_name}
+          </div>
+        ))}
       </div>
     );
   }
@@ -78,11 +89,12 @@ const mapStateToProps = (state, ownProps) => {
   return {
     cDate,
     shifts: getShifts(state, startDate),
+    employees: getEmployees(state),
   };
 };
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({ shiftsLoading }, dispatch),
+  actions: bindActionCreators({ shiftsLoading, employeesLoading }, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShiftTable);

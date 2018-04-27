@@ -1,6 +1,13 @@
 /* @flow */
 import axios from 'axios';
-import type { Api, FetchShiftsParams, Shift, PromiseCancel } from './types';
+import type {
+  Api,
+  FetchShiftsParams,
+  Shift,
+  FetchEmployeesParams,
+  Employee,
+  PromiseCancel,
+} from './types';
 import config from '../config.json';
 
 function requestGet<T>({ url, params }): PromiseCancel<T> {
@@ -25,6 +32,12 @@ class ApiIml implements Api {
   fetchShifts = (params: FetchShiftsParams): PromiseCancel<Array<Shift>> =>
     requestGet({
       url: `${config.url}/shifts`,
+      params,
+    });
+
+  fetchEmployees = (params: FetchEmployeesParams): PromiseCancel<Array<Employee>> =>
+    requestGet({
+      url: `${config.url}/employees`,
       params,
     });
 }
