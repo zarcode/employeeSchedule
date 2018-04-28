@@ -2,13 +2,13 @@
 
 export type PromiseCancel<T> = {
   promise: Promise<T>,
-  cancel: (reason?: string) => void
+  cancel: (reason?: string) => void,
 };
 
 export type Position = {
   name: string,
   color: string,
-}
+};
 
 export type Employee = {
   id: number,
@@ -16,7 +16,7 @@ export type Employee = {
   last_name: string,
   avatar: string,
   position: Position,
-}
+};
 
 export type Shift = {
   id: number,

@@ -17,10 +17,7 @@ const byId = (state = {}, action) => {
 
 const ids = (state = [], action) => {
   if (action.type === ACTION.FETCH_EMPLOYEES_SUCCESS) {
-    return [
-      ...state,
-      ...action.response.result,
-    ];
+    return [...state, ...action.response.result];
   }
   return state;
 };
@@ -63,7 +60,5 @@ export const getById = state => state.employees.byId;
 // $FlowFixMe
 export const getIds = state => state.employees.ids;
 
-export const getEmployees = createSelector(
-  [getIds, getById],
-  (allIds, allbById) => allIds.map(id => allbById[id]),
-);
+export const getEmployees = createSelector([getIds, getById], (allIds, allbById) =>
+  allIds.map(id => allbById[id]));

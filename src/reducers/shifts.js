@@ -66,12 +66,9 @@ export const getIsFetching = state => state.shifts.isFetching;
 // $FlowFixMe
 export const getErrorMessage = state => state.shifts.errorMessage;
 
-export const getShifts = createSelector(
-  [getIds, getById],
-  (allIds, allbById) => {
-    if (allIds) {
-      return allIds.map(id => allbById[id]);
-    }
-    return [];
-  },
-);
+export const getShifts = createSelector([getIds, getById], (allIds, allbById) => {
+  if (allIds) {
+    return allIds.map(id => allbById[id]);
+  }
+  return [];
+});

@@ -17,12 +17,10 @@ import api from '../api';
 const loadEmployees = (action: Observable<Action>): Observable<Action> =>
   action.ofType(ACTION.FETCH_EMPLOYEES_LOADING).mergeMap(() => {
     // const loadingAction = Observable.of(employeesActions.employeesLoading());
-    const requestAction = asObservable(api
-      .fetchEmployees({}))
+    const requestAction = asObservable(api.fetchEmployees({}))
       .map(data => employeesActions.employeesSuccess(data))
       .catch(e => Observable.of(employeesActions.employeesFail(e.message)));
-    return requestAction.takeUntil(action
-      .filter(futureAction => futureAction.type === ACTION.FETCH_EMPLOYEES_LOADING));
+    return requestAction.takeUntil(action.filter(futureAction => futureAction.type === ACTION.FETCH_EMPLOYEES_LOADING));
   });
 
 export default loadEmployees;
