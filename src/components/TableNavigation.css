@@ -1,0 +1,16 @@
+.filters {
+    display: flex;
+    border: 1px solid #999999;
+    border-radius: 5px;
+    background-color: #e1e1e1;
+}
+
+.filters .button {
+    padding: 7px;
+}
+
+.filters .button.today {
+    background-color: white;
+    border-left: 1px solid #999999;
+    border-right: 1px solid #999999;
+}

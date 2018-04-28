@@ -3,6 +3,8 @@ import * as moment from 'moment';
 import { Link } from 'react-router-dom';
 import { DATES } from '../constants';
 
+import styles from './TableNavigation.css';
+
 const { APP_FORMAT } = DATES;
 
 type Props = {
@@ -23,14 +25,14 @@ Props) => {
     .add(stepValue, step)
     .format(APP_FORMAT);
   return (
-    <div>
-      <Link href="page" to={`${path}${prev}`}>
+    <div className={styles.filters}>
+      <Link className={styles.button} href={`${path}${prev}`} to={`${path}${prev}`}>
         {'<'}
       </Link>
-      <Link href="page" to={`${path}${today}`}>
+      <Link className={`${styles.button} ${styles.today}`} href={`${path}${today}`} to={`${path}${today}`}>
         Today
       </Link>
-      <Link href="page" to={`${path}${next}`}>
+      <Link className={styles.button} href={`${path}${next}`} to={`${path}${next}`}>
         {'>'}
       </Link>
     </div>

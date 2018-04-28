@@ -2,6 +2,7 @@
 
 import React from 'react';
 import type { Element } from 'react';
+import styles from './Table.css';
 
 type Props = {
   rows: Array<any>,
@@ -24,7 +25,7 @@ const Table = ({
   renderCell,
 }:
 Props) => (
-  <table>
+  <table className={styles.table}>
     <thead>
       <tr>
         <th>{renderFirstCell()}</th>

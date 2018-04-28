@@ -1,0 +1,12 @@
+html {
+    box-sizing: border-box;
+    font-size: 0.9em;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+a {
+    text-decoration: none;
+}
