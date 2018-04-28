@@ -23,7 +23,7 @@ export type Shift = {
   name: string,
   date: string,
   position: Position,
-  employees: Array<Employee>,
+  employees: Array<number>,
 };
 
 export type FetchShiftsParams = {

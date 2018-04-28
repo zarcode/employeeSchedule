@@ -1,5 +1,18 @@
-import React from 'react';
+/* @flow */
 
+import React from 'react';
+import type { Element } from 'react';
+
+type Props = {
+  rows: Array<any>,
+  rowKeyExtractor: (any) => string | number,
+  renderRowHeader: (any) => Element<any> | string | null,
+  columns: Array<any>,
+  columnKeyExtractor: (any) => string | number,
+  renderColumnHeader: (any, number) => Element<any> | string | null,
+  renderFirstCell: () => Element<any> | string | null,
+  renderCell: (any, number) => Element<any> | string | null,
+};
 const Table = ({
   rows,
   rowKeyExtractor,
@@ -9,7 +22,8 @@ const Table = ({
   renderColumnHeader,
   renderFirstCell,
   renderCell,
-}) => (
+}:
+Props) => (
   <table>
     <thead>
       <tr>
@@ -26,9 +40,7 @@ const Table = ({
         <tr key={`tr-${rowKeyExtractor(rowItem)}`}>
           <td>{renderRowHeader(rowItem)}</td>
           {columns.map((columnItem, index) => (
-            <td key={`td-${columnKeyExtractor(columnItem)}`}>
-              {renderCell(rowItem, index)}
-            </td>
+            <td key={`td-${columnKeyExtractor(columnItem)}`}>{renderCell(rowItem, index)}</td>
           ))}
         </tr>
       ))}

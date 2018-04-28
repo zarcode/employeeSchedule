@@ -1,3 +1,5 @@
+/* @flow */
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as moment from 'moment';
@@ -11,20 +13,41 @@ import {
   // getLoadingState,
 } from '../reducers/shifts';
 import { getEmployees } from '../reducers/employees';
+
 import ShiftsTable from './ShiftsTable';
 import TableNavigation from './TableNavigation';
 import EmployeesFilter from './EmployeesFilter';
+
 import { DATES } from '../constants';
+
+import type { Employee, Shift } from '../api/types';
+
 import styles from './ShiftsOverview.css';
 
 const { APP_FORMAT } = DATES;
 
-class ShiftsOverview extends Component {
+type Props = {
+  cDate: string,
+  shifts: Array<Shift>,
+  employees: Array<Employee>,
+  errorMessage: string,
+  actions: {
+    employeesLoading: () => void,
+    shiftsLoading: (startDate: number, endDate: number) => void,
+  },
+};
+
+type State = {
+  tableStartDate: string,
+  employeeFilterValue: string,
+};
+
+class ShiftsOverview extends Component<Props, State> {
   constructor(props) {
     super(props);
     this.state = {
-      tableStartDate: null,
-      employeeFilterValue: null,
+      tableStartDate: '',
+      employeeFilterValue: '',
     };
   }
   componentDidMount() {
@@ -46,7 +69,7 @@ class ShiftsOverview extends Component {
     this.setState({ tableStartDate: startDate.format(APP_FORMAT) });
     this.props.actions.shiftsLoading(startDate.valueOf(), endDate.valueOf());
   };
-  filterEmployees = (e) => {
+  filterEmployees = (e: SyntheticInputEvent<HTMLInputElement>) => {
     this.setState({ employeeFilterValue: e.target.value });
   };
   render() {
@@ -59,19 +82,9 @@ class ShiftsOverview extends Component {
     });
     return (
       <div>
-        <div
-          className={styles.shiftsFitersNav}
-        >
-          <TableNavigation
-            path="/overview/"
-            current={cDate}
-            stepValue={7}
-            step="days"
-          />
-          <EmployeesFilter
-            employees={this.props.employees}
-            onChange={this.filterEmployees}
-          />
+        <div className={styles.shiftsFitersNav}>
+          <TableNavigation path="/overview/" current={cDate} stepValue={7} step="days" />
+          <EmployeesFilter employees={this.props.employees} onChange={this.filterEmployees} />
         </div>
         <ShiftsTable
           startDate={this.state.tableStartDate}

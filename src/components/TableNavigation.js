@@ -5,7 +5,16 @@ import { DATES } from '../constants';
 
 const { APP_FORMAT } = DATES;
 
-const TableNavigation = ({ path, current, stepValue, step }) => {
+type Props = {
+  path: string,
+  current: string,
+  stepValue: number,
+  step: string,
+}
+const TableNavigation = ({
+  path, current, stepValue, step,
+}:
+Props) => {
   const today = moment().format(APP_FORMAT);
   const prev = moment(current, APP_FORMAT)
     .subtract(stepValue, step)

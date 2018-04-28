@@ -13,4 +13,4 @@ export const ACTION = {
 export const DATES = {
   APP_FORMAT: 'MM-DD-YYYY',
   PREVIEW_FORMAT: 'MMM D',
-}
+};

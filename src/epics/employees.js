@@ -11,7 +11,7 @@ import 'rxjs/add/operator/takeUntil';
 import { ACTION } from '../constants';
 import type { Action } from '../actions/actionTypes';
 import * as employeesActions from '../actions/employees';
-import { asObservable } from './rxUtils';
+import asObservable from './rxUtils';
 import api from '../api';
 
 const loadEmployees = (action: Observable<Action>): Observable<Action> =>
@@ -20,7 +20,9 @@ const loadEmployees = (action: Observable<Action>): Observable<Action> =>
     const requestAction = asObservable(api.fetchEmployees({}))
       .map(data => employeesActions.employeesSuccess(data))
       .catch(e => Observable.of(employeesActions.employeesFail(e.message)));
-    return requestAction.takeUntil(action.filter(futureAction => futureAction.type === ACTION.FETCH_EMPLOYEES_LOADING));
+    return requestAction
+      .takeUntil(action
+        .filter(futureAction => futureAction.type === ACTION.FETCH_EMPLOYEES_LOADING));
   });
 
 export default loadEmployees;
