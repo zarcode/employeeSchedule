@@ -1,6 +1,5 @@
 /* @flow */
 
-import logger from 'redux-logger';
 import { createStore, applyMiddleware } from 'redux';
 import { createEpicMiddleware } from 'redux-observable';
 import type { Middleware } from 'redux';
@@ -12,6 +11,7 @@ export default () => {
   const middleWares: Array<Middleware> = [createEpicMiddleware(rootEpic)];
 
   if (process.env.NODE_ENV) {
+    const { logger } = require('redux-logger'); // eslint-disable-line global-require
     middleWares.push(logger);
   }
 
