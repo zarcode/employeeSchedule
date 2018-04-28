@@ -5,6 +5,7 @@ import * as moment from 'moment';
 
 import Table from './Table';
 import ShiftsCell from './ShiftsCell';
+import EmployeeTableItem from './EmployeeTableItem';
 
 import type { Employee, Shift } from '../api/types';
 
@@ -20,22 +21,31 @@ type Props = {
 };
 
 class ShiftsTable extends Component<Props> {
+  employeeToViewModel = function (employee: Employee) {
+    return employee;
+  };
+
   extractEmployeeKey = function (employee: Employee) {
     return employee.id;
   };
+
   extractDaysKey = function (day: string) {
     return day;
   };
+
   renderColumnHeader = (columnItem: string, index: number) =>
     `${columnItem}, ${moment(this.props.startDate, APP_FORMAT)
       .add(index, 'days')
       .format(PREVIEW_FORMAT)}`;
-  renderRowHeader = function (rowItem: Employee) {
-    return rowItem.first_name;
+
+  renderRowHeader = function (employee: Employee) {
+    return <EmployeeTableItem employee={employee} />;
   };
+
   renderFirstCell = function () {
     return null;
   };
+
   renderCell = (employee: Employee, dayNumber: number) => {
     const dayShifts = this.props.shifts.filter(shift =>
       parseInt(shift.date, 10) ===

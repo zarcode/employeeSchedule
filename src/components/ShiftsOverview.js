@@ -50,10 +50,12 @@ class ShiftsOverview extends Component<Props, State> {
       employeeFilterValue: '',
     };
   }
+
   componentDidMount() {
     this.props.actions.employeesLoading();
     this.loadMore(this.props.cDate);
   }
+
   componentWillReceiveProps(nextProps) {
     // @todo error handling
     if (this.props.errorMessage) {
@@ -63,15 +65,18 @@ class ShiftsOverview extends Component<Props, State> {
       this.loadMore(nextProps.cDate);
     }
   }
+
   loadMore = (cDate) => {
     const startDate = moment(cDate, APP_FORMAT).startOf('isoWeek');
     const endDate = moment(cDate, APP_FORMAT).endOf('isoWeek');
     this.setState({ tableStartDate: startDate.format(APP_FORMAT) });
     this.props.actions.shiftsLoading(startDate.valueOf(), endDate.valueOf());
   };
+
   filterEmployees = (e: SyntheticInputEvent<HTMLInputElement>) => {
     this.setState({ employeeFilterValue: e.target.value });
   };
+  
   render() {
     const { cDate } = this.props;
     const employees = this.props.employees.filter((x) => {

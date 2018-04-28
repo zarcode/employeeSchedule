@@ -11,6 +11,6 @@ th, td {
 th {
     font-size: 0.88em;
 }
-tr:first-child td:first-child {
+th:first-child, td:first-child {
     min-width: 90px;
 }
