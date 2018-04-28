@@ -1,0 +1,120 @@
+{
+  "employees": [
+    {
+      "id": 1,
+      "first_name": "Zarko",
+      "last_name": "Dencic",
+      "avatar": "image",
+      "position": {
+        "name": "Developer",
+        "color": "blue"
+      }
+    },
+    {
+      "id": 2,
+      "first_name": "Tamara",
+      "last_name": "Zarko",
+      "avatar": "image",
+      "position": {
+        "name": "Developer",
+        "color": "blue"
+      }
+    }
+  ],
+  "shifts": [
+    {
+      "id": 1,
+      "name": "Shift1",
+      "date": 1524693600000,
+      "position": {
+        "name": "Developer",
+        "color": "blue"
+      },
+      "employees": [
+        {
+          "id": 1,
+          "first_name": "Zarko",
+          "last_name": "Dencic",
+          "avatar": "image",
+          "position": {
+            "name": "Developer",
+            "color": "blue"
+          }
+        },
+        {
+          "id": 2,
+          "first_name": "Tamara",
+          "last_name": "Zarko",
+          "avatar": "image",
+          "position": {
+            "name": "Developer",
+            "color": "blue"
+          }
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Shift2",
+      "date": 1525125600000,
+      "position": {
+        "name": "Manager",
+        "color": "blue"
+      },
+      "employees": [
+        {
+          "id": 1,
+          "first_name": "Zarko",
+          "last_name": "Dencic",
+          "avatar": "image",
+          "position": {
+            "name": "Developer",
+            "color": "blue"
+          }
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Shift3",
+      "date": 1524780000000,
+      "position": {
+        "name": "Manager",
+        "color": "blue"
+      },
+      "employees": [
+        {
+          "id": 2,
+          "first_name": "Tamara",
+          "last_name": "Dencic",
+          "avatar": "image",
+          "position": {
+            "name": "Developer",
+            "color": "blue"
+          }
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Shift4",
+      "date": 1525471200000,
+      "position": {
+        "name": "Manager",
+        "color": "blue"
+      },
+      "employees": [
+        {
+          "id": 2,
+          "first_name": "Tamara",
+          "last_name": "Dencic",
+          "avatar": "image",
+          "position": {
+            "name": "Developer",
+            "color": "blue"
+          }
+        }
+      ]
+    }
+  ]
+}

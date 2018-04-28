@@ -22,7 +22,7 @@ export const shiftsSuccess = (
 ): ShiftsAction =>
   ({
     type: ACTION.FETCH_SHIFTS_SUCCESS,
-    response: normalize(response, schema.shifts),
+    response: normalize(response, schema.shifts), // todo fix REST response
     startDate,
   });
 

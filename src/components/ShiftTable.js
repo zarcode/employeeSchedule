@@ -12,6 +12,8 @@ import {
   // getLoadingState,
 } from '../reducers/shifts';
 import { getEmployees } from '../reducers/employees';
+import WeekTable from './WeekTable';
+import ShiftsCell from './ShiftsCell';
 
 const dateFormat = 'MM-DD-YYYY';
 const previewFormat = 'MMM D';
@@ -21,7 +23,8 @@ class ShiftTable extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tableStartDate: moment(props.cDate, dateFormat).startOf('isoWeek').format(dateFormat),
+      tableStartDate: null,
+      employeeFilterValue: null,
     };
   }
   componentDidMount() {
@@ -43,10 +46,40 @@ class ShiftTable extends Component {
     this.setState({ tableStartDate: startDate.format(dateFormat) });
     this.props.actions.shiftsLoading(startDate.valueOf(), endDate.valueOf());
   }
+  extractEmployeeKey = function (item) {
+    return item.id;
+  };
+  renderColumnHeader = (columnItem, index) => `${columnItem}, ${moment(this.state.tableStartDate, dateFormat).add(index, 'days').format(previewFormat)}`;
+  renderRowHeader = function (rowItem) {
+    return rowItem.first_name;
+  };
+  renderCell = (employee, dayNumber) => {
+    const dayShifts = this.props.shifts
+      .filter(shift =>
+          parseInt(shift.date, 10) === moment(this.state.tableStartDate, dateFormat).add(dayNumber, 'days').valueOf()
+          && shift.employees.indexOf(employee.id) > -1
+      );
+
+    return (
+      <ShiftsCell
+        shifts={dayShifts}
+      />
+    );
+  };
+  filterEmployees = (e) => {
+    this.setState({ employeeFilterValue: e.target.value });
+  }
   render() {
     const { cDate } = this.props;
     const prevWeekDate = moment(cDate, dateFormat).subtract(7, 'days').format(dateFormat);
     const nextWeekDate = moment(cDate, dateFormat).add(7, 'days').format(dateFormat);
+    const employees = this.props.employees
+      .filter(x => {
+        if (this.state.employeeFilterValue) {
+          return this.state.employeeFilterValue === x.id.toString();
+        }
+        return true;
+      });
     return (
       <div>
         <Link
@@ -61,23 +94,21 @@ class ShiftTable extends Component {
         >
           Right
         </Link>
-        <div>{this.state.tableStartDate}</div>
-        {weekDays
-          .map((dayName, index) => (
-            <div
-              key={dayName}
-            >
-              {`${dayName}, ${moment(this.state.tableStartDate, dateFormat).add(index, 'days').format(previewFormat)}`}
-            </div>
+        <select name="" id="" onChange={this.filterEmployees}>
+          <option value="">All</option>
+          {this.props.employees.map((employee) => (
+            <option key={employee.id} value={employee.id}>
+              {`${employee.first_name} ${employee.last_name}`}
+            </option>
           ))}
-
-        {this.props.employees.map((employee) => (
-          <div
-            key={employee.id}
-          >
-            {employee.first_name}
-          </div>
-        ))}
+        </select>
+        <WeekTable
+          rows={employees}
+          rowKeyExtractor={this.extractEmployeeKey}
+          renderRowHeader={this.renderRowHeader}
+          renderColumnHeader={this.renderColumnHeader}
+          renderCell={this.renderCell}
+        />
       </div>
     );
   }

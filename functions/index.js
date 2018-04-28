@@ -21,12 +21,26 @@ exports.shifts = functions.https.onRequest(function(request, response) {
     let startDate;
     let endDate;
     if ('startDate' in request.query && 'endDate' in request.query) {
-      startDate = request.query.startDate;
-      endDate = request.query.endDate;
+      startDate = Number(request.query.startDate);
+      endDate = Number(request.query.endDate);
     } else {
       response.status(500).send({ message: "Required params are not provided" });
     }
     return admin.database().ref('shifts').orderByChild("date").startAt(startDate).endAt(endDate).once('value', (snapshot) => {
+      console.log("snapshot", snapshot);
+      const event = snapshot.val();
+      console.log("event", event);
+      if (Array.isArray(event)) {
+        response.send(event.filter(x => x !== null));
+      }
+      response.send([]);
+    });
+  });
+});
+
+exports.allshifts = functions.https.onRequest(function(request, response) {
+  return cors(request, response, function() {
+    return admin.database().ref('shifts').orderByChild("date").once('value', (snapshot) => {
       console.log("snapshot", snapshot);
       const event = snapshot.val();
       console.log("event", event);
