@@ -5,29 +5,29 @@ import { connect } from 'react-redux';
 import * as moment from 'moment';
 import { bindActionCreators } from 'redux';
 
-import { shiftsLoading } from '../actions/shifts';
-import { employeesLoading } from '../actions/employees';
+import { shiftsLoading } from '../../actions/shifts';
+import { employeesLoading } from '../../actions/employees';
 import {
   getShifts,
   getErrorMessage as getShiftsErrorMessage,
-} from '../reducers/shifts';
+} from '../../reducers/shifts';
 import {
   getEmployees,
   getErrorMessage as getEmployeesErrorMessage,
-} from '../reducers/employees';
+} from '../../reducers/employees';
 import {
   getById as getPositionsObject,
-} from '../reducers/positions';
+} from '../../reducers/positions';
 
 import ShiftsTable from './ShiftsTable';
-import TableNavigation from './TableNavigation';
-import EmployeesFilter from './EmployeesFilter';
+import TableNavigation from '../TableNavigation';
+import EmployeesFilter from '../EmployeesFilter';
 
-import { DATE_FORMATS } from '../constants';
+import { DATE_FORMATS } from '../../constants/index';
 
-import type { Employee, Shift, Position } from '../api/types';
+import type { Employee, Shift, Position } from '../../api/types';
 
-import styles from './ShiftsOverview.css';
+import styles from '../ShiftsOverview.css';
 
 const { APP_FORMAT } = DATE_FORMATS;
 

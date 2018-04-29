@@ -3,7 +3,7 @@ import type { EmployeeViewModel } from './ShiftsTable';
 
 import styles from './EmployeeTableItem.css';
 
-const noAvatar = require('../assets/img/no-avatar.png');
+const noAvatar = require('../../assets/img/no-avatar.png');
 
 type Props = {
   employee: EmployeeViewModel,
