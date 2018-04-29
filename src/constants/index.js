@@ -10,7 +10,7 @@ export const ACTION = {
   FETCH_EMPLOYEES_FAIL: 'FETCH_EMPLOYEES_FAIL',
 };
 
-export const DATES = {
+export const DATE_FORMATS = {
   APP_FORMAT: 'MM-DD-YYYY',
   PREVIEW_FORMAT: 'MMM D',
 };

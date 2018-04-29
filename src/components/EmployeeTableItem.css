@@ -1,0 +1,9 @@
+.avatar {
+    width: 45px;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+.name {
+    display: inline-block;
+    vertical-align: middle;
+}

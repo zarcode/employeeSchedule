@@ -1,11 +1,11 @@
 import React from 'react';
 import * as moment from 'moment';
 import { Link } from 'react-router-dom';
-import { DATES } from '../constants';
+import { DATE_FORMATS } from '../constants';
 
 import styles from './TableNavigation.css';
 
-const { APP_FORMAT } = DATES;
+const { APP_FORMAT } = DATE_FORMATS;
 
 type Props = {
   path: string,

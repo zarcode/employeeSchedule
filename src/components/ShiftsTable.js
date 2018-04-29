@@ -3,15 +3,17 @@
 import React, { Component } from 'react';
 import * as moment from 'moment';
 
-import Table from './Table';
+import Table from './TimeTable';
 import ShiftsCell from './ShiftsCell';
 import EmployeeTableItem from './EmployeeTableItem';
 
 import type { Employee, Shift } from '../api/types';
 
-import { DATES } from '../constants';
+import { DATE_FORMATS } from '../constants';
 
-const { APP_FORMAT, PREVIEW_FORMAT } = DATES;
+const get = require('lodash/get');
+
+const { APP_FORMAT, PREVIEW_FORMAT } = DATE_FORMATS;
 const weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
 type Props = {
@@ -20,10 +22,28 @@ type Props = {
   employees: Array<Employee>,
 };
 
-class ShiftsTable extends Component<Props> {
-  employeeToViewModel = function (employee: Employee) {
-    return employee;
+type EmployeeViewModel = {
+  firstName: string,
+  lastName: string,
+  avatar: string,
+}
+
+const employeeToViewModel = function (employee: Employee): EmployeeViewModel {
+  return {
+    firstName: get(employee, 'first_name', ''),
+    lastName: get(employee, 'last_name', ''),
+    avatar: get(employee, 'avatar', ''),
   };
+};
+
+class ShiftsTable extends Component<Props> {
+  componentWillUpdate(nextProps: Props) {
+    if (nextProps.startDate !== this.props.startDate) {
+      this.today = moment().format(APP_FORMAT);
+    }
+  }
+
+  today: string;
 
   extractEmployeeKey = function (employee: Employee) {
     return employee.id;
@@ -33,13 +53,17 @@ class ShiftsTable extends Component<Props> {
     return day;
   };
 
+  highLightCell = (index: number) => this.today ===
+      moment(this.props.startDate, APP_FORMAT)
+        .add(index, 'days').format(APP_FORMAT);
+
   renderColumnHeader = (columnItem: string, index: number) =>
     `${columnItem}, ${moment(this.props.startDate, APP_FORMAT)
       .add(index, 'days')
       .format(PREVIEW_FORMAT)}`;
 
   renderRowHeader = function (employee: Employee) {
-    return <EmployeeTableItem employee={employee} />;
+    return <EmployeeTableItem employee={employeeToViewModel(employee)} />;
   };
 
   renderFirstCell = function () {
@@ -55,6 +79,7 @@ class ShiftsTable extends Component<Props> {
 
     return <ShiftsCell shifts={dayShifts} />;
   };
+
   render() {
     return (
       <Table
@@ -66,6 +91,7 @@ class ShiftsTable extends Component<Props> {
         renderColumnHeader={this.renderColumnHeader}
         renderFirstCell={this.renderFirstCell}
         renderCell={this.renderCell}
+        highLightCell={this.highLightCell}
       />
     );
   }

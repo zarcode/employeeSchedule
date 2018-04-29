@@ -26,24 +26,30 @@ exports.shifts = functions.https.onRequest(function(request, response) {
     } else {
       response.status(500).send({ message: "Required params are not provided" });
     }
+
     return admin.database().ref('shifts').orderByChild("date").startAt(startDate).endAt(endDate).once('value', (snapshot) => {
-      console.log("snapshot", snapshot);
       const event = snapshot.val();
-      console.log("event", event);
       if (Array.isArray(event)) {
         response.send(event.filter(x => x !== null));
+      } else {
+        response.send([]);
       }
-      response.send([]);
     });
   });
 });
 
 exports.allshifts = functions.https.onRequest(function(request, response) {
   return cors(request, response, function() {
-    return admin.database().ref('shifts').orderByChild("date").once('value', (snapshot) => {
-      console.log("snapshot", snapshot);
+    let startDate;
+    let endDate;
+    if ('startDate' in request.query && 'endDate' in request.query) {
+      startDate = Number(request.query.startDate);
+      endDate = Number(request.query.endDate);
+    } else {
+      response.status(500).send({ message: "Required params are not provided" });
+    }
+    admin.database().ref('shifts').orderByChild("date").startAt(startDate).endAt(endDate).once('value', (snapshot) => {
       const event = snapshot.val();
-      console.log("event", event);
       response.send(event || []);
     });
   });
@@ -52,9 +58,7 @@ exports.allshifts = functions.https.onRequest(function(request, response) {
 exports.employees = functions.https.onRequest(function(request, response) {
   return cors(request, response, function() {
     return admin.database().ref('employees').once('value', (snapshot) => {
-      console.log("snapshot", snapshot);
       const event = snapshot.val();
-      console.log("event", event);
       response.send(event || []);
     });
   });

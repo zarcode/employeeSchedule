@@ -18,13 +18,13 @@ import ShiftsTable from './ShiftsTable';
 import TableNavigation from './TableNavigation';
 import EmployeesFilter from './EmployeesFilter';
 
-import { DATES } from '../constants';
+import { DATE_FORMATS } from '../constants';
 
 import type { Employee, Shift } from '../api/types';
 
 import styles from './ShiftsOverview.css';
 
-const { APP_FORMAT } = DATES;
+const { APP_FORMAT } = DATE_FORMATS;
 
 type Props = {
   cDate: string,
@@ -43,7 +43,7 @@ type State = {
 };
 
 class ShiftsOverview extends Component<Props, State> {
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
     this.state = {
       tableStartDate: '',
@@ -51,13 +51,15 @@ class ShiftsOverview extends Component<Props, State> {
     };
   }
 
+  state: State;
+
   componentDidMount() {
     this.props.actions.employeesLoading();
     this.loadMore(this.props.cDate);
   }
 
   componentWillReceiveProps(nextProps) {
-    // @todo error handling
+    // @todo better error handling
     if (this.props.errorMessage) {
       alert(this.props.errorMessage);
     }
@@ -76,8 +78,12 @@ class ShiftsOverview extends Component<Props, State> {
   filterEmployees = (e: SyntheticInputEvent<HTMLInputElement>) => {
     this.setState({ employeeFilterValue: e.target.value });
   };
-  
+
   render() {
+    // console.log('render');
+    // if (this.props.employees.length === 0) {
+    //   return <div>Loading</div>;
+    // }
     const { cDate } = this.props;
     const employees = this.props.employees.filter((x) => {
       if (this.state.employeeFilterValue) {
@@ -85,6 +91,7 @@ class ShiftsOverview extends Component<Props, State> {
       }
       return true;
     });
+
     return (
       <div>
         <div className={styles.shiftsFitersNav}>

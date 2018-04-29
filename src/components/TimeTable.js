@@ -2,7 +2,7 @@
 
 import React from 'react';
 import type { Element } from 'react';
-import styles from './Table.css';
+import styles from './TimeTable.css';
 
 type Props = {
   rows: Array<any>,
@@ -13,6 +13,7 @@ type Props = {
   renderColumnHeader: (any, number) => Element<any> | string | null,
   renderFirstCell: () => Element<any> | string | null,
   renderCell: (any, number) => Element<any> | string | null,
+  highLightCell: (number) => boolean,
 };
 const Table = ({
   rows,
@@ -23,6 +24,7 @@ const Table = ({
   renderColumnHeader,
   renderFirstCell,
   renderCell,
+  highLightCell,
 }:
 Props) => (
   <table className={styles.table}>
@@ -30,7 +32,10 @@ Props) => (
       <tr>
         <th>{renderFirstCell()}</th>
         {columns.map((columnItem, index) => (
-          <th key={`th-${columnKeyExtractor(columnItem)}`}>
+          <th
+            key={`th-${columnKeyExtractor(columnItem)}`}
+            className={highLightCell(index) ? styles.highlighted : ''}
+          >
             {renderColumnHeader(columnItem, index)}
           </th>
         ))}
@@ -41,7 +46,12 @@ Props) => (
         <tr key={`tr-${rowKeyExtractor(rowItem)}`}>
           <td>{renderRowHeader(rowItem)}</td>
           {columns.map((columnItem, index) => (
-            <td key={`td-${columnKeyExtractor(columnItem)}`}>{renderCell(rowItem, index)}</td>
+            <td
+              key={`td-${columnKeyExtractor(columnItem)}`}
+              className={highLightCell(index) ? styles.highlighted : ''}
+            >
+              {renderCell(rowItem, index)}
+            </td>
           ))}
         </tr>
       ))}

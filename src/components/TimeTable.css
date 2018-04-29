@@ -12,5 +12,8 @@ th {
     font-size: 0.88em;
 }
 th:first-child, td:first-child {
-    min-width: 90px;
+    min-width: 55px;
+}
+th.highlighted, td.highlighted {
+    background-color: #e1e1e1;
 }
