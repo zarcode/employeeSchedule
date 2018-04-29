@@ -85,7 +85,6 @@ class ShiftsTable extends Component<Props> {
         columns={weekDays}
         columnKeyExtractor={this.extractDaysKey}
         renderColumnHeader={this.renderColumnHeader}
-        renderFirstCell={this.renderFirstCell}
         renderCell={this.renderCell}
         highLightCell={this.highLightCell}
       />
