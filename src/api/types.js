@@ -16,15 +16,15 @@ export type Employee = {
   first_name: string,
   last_name: string,
   avatar: string,
-  position: Position,
+  position: number, // position id
 };
 
 export type Shift = {
   id: number,
   name: string,
   date: string,
-  position: Position,
-  employees: Array<number>,
+  position: number, // position id
+  employees: Array<number>, // array of ids
 };
 
 export type FetchShiftsParams = {

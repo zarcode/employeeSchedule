@@ -7,7 +7,7 @@ import Table from './TimeTable';
 import ShiftsCell from './ShiftsCell';
 import EmployeeTableItem from './EmployeeTableItem';
 
-import type { Employee, Shift } from '../api/types';
+import type { Employee, Shift, Position } from '../api/types';
 
 import { DATE_FORMATS } from '../constants';
 
@@ -20,9 +20,10 @@ type Props = {
   startDate: string,
   shifts: Array<Shift>,
   employees: Array<Employee>,
+  positions: { [string]: Position },
 };
 
-type EmployeeViewModel = {
+export type EmployeeViewModel = {
   firstName: string,
   lastName: string,
   avatar: string,
@@ -77,7 +78,11 @@ class ShiftsTable extends Component<Props> {
             .add(dayNumber, 'days')
             .valueOf() && shift.employees.indexOf(employee.id) > -1);
 
-    return <ShiftsCell shifts={dayShifts} />;
+    return (
+      <ShiftsCell
+        shifts={dayShifts}
+        positions={this.props.positions}
+      />);
   };
 
   render() {

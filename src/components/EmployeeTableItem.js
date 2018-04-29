@@ -1,11 +1,15 @@
 import React from 'react';
-import type { Employee } from '../api/types';
+import type { EmployeeViewModel } from './ShiftsTable';
 
 import styles from './EmployeeTableItem.css';
 
 const noAvatar = require('../assets/img/no-avatar.png');
 
-const EmployeeTableItem = ({ employee }: Employee) =>
+type Props = {
+  employee: EmployeeViewModel,
+};
+
+const EmployeeTableItem = ({ employee }: Props) =>
   (
     <div>
       <img

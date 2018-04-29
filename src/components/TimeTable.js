@@ -34,7 +34,7 @@ Props) => (
         {columns.map((columnItem, index) => (
           <th
             key={`th-${columnKeyExtractor(columnItem)}`}
-            className={highLightCell(index) ? styles.highlighted : ''}
+            className={highLightCell(index) ? styles.highlighted : 'regular'}
           >
             {renderColumnHeader(columnItem, index)}
           </th>
@@ -48,7 +48,7 @@ Props) => (
           {columns.map((columnItem, index) => (
             <td
               key={`td-${columnKeyExtractor(columnItem)}`}
-              className={highLightCell(index) ? styles.highlighted : ''}
+              className={highLightCell(index) ? styles.highlighted : 'regular'}
             >
               {renderCell(rowItem, index)}
             </td>

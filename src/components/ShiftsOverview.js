@@ -16,7 +16,7 @@ import {
   getErrorMessage as getEmployeesErrorMessage,
 } from '../reducers/employees';
 import {
-  getPositions,
+  getById as getPositionsObject,
 } from '../reducers/positions';
 
 import ShiftsTable from './ShiftsTable';
@@ -35,7 +35,7 @@ type Props = {
   cDate: string,
   shifts: Array<Shift>,
   employees: Array<Employee>,
-  positions: Array<Position>,
+  positions: { [string]: Position },
   errorMessage: string,
   actions: {
     employeesLoading: () => void,
@@ -123,7 +123,7 @@ const mapStateToProps = (state, ownProps) => {
     cDate,
     shifts: getShifts(state, startDate),
     employees: getEmployees(state),
-    positions: getPositions(state),
+    positions: getPositionsObject(state),
     errorMessage: getEmployeesErrorMessage(state) || getShiftsErrorMessage(state),
   };
 };

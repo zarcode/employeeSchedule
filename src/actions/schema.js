@@ -9,6 +9,7 @@ export const employees = [employee];
 
 const shift = new schema.Entity('shifts', {
   employees,
+  position,
 });
 
 export const shifts = [shift];
