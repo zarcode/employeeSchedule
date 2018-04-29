@@ -3,13 +3,13 @@
 import React, { Component } from 'react';
 import * as moment from 'moment';
 
-import Table from './TimeTable';
+import Table from '../shared/TimeTable';
 import ShiftsCell from './ShiftsCell';
 import EmployeeTableItem from './EmployeeTableItem';
 
-import type { Employee, Shift, Position } from '../api/types';
+import type { Employee, Shift, Position } from '../../api/types';
 
-import { DATE_FORMATS } from '../constants';
+import { DATE_FORMATS } from '../../constants/index';
 
 const get = require('lodash/get');
 

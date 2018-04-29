@@ -20,14 +20,14 @@ import {
 } from '../../reducers/positions';
 
 import ShiftsTable from './ShiftsTable';
-import TableNavigation from '../TableNavigation';
-import EmployeesFilter from '../EmployeesFilter';
+import TableNavigation from '../shared/TableNavigation';
+import EmployeesFilter from './EmployeesFilter';
 
 import { DATE_FORMATS } from '../../constants/index';
 
 import type { Employee, Shift, Position } from '../../api/types';
 
-import styles from '../ShiftsOverview.css';
+import styles from './ShiftsOverview.css';
 
 const { APP_FORMAT } = DATE_FORMATS;
 

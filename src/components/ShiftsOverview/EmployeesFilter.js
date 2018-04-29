@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from 'react';
-import type { Employee } from '../api/types';
+import type { Employee } from '../../api/types';
 
 type Props = {
   onChange: (e: SyntheticInputEvent<HTMLInputElement>) => void,

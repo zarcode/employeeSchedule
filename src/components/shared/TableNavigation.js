@@ -1,7 +1,7 @@
 import React from 'react';
 import * as moment from 'moment';
 import { Link } from 'react-router-dom';
-import { DATE_FORMATS } from '../constants';
+import { DATE_FORMATS } from '../../constants/index';
 
 import styles from './TableNavigation.css';
 

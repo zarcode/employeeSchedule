@@ -1,3 +1,8 @@
 .layout {
     padding: 20px;
 }
+.loadingBar {
+    background-color: #00aae1;
+    height: 3px;
+    position: absolute;
+}

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import ShiftTableItem from './ShiftTableItem';
-import type { Shift, Position } from '../api/types';
+import type { Shift, Position } from '../../api/types';
 
 const get = require('lodash/get');
 
