@@ -5,8 +5,8 @@
     "id" : 1,
     "last_name" : "Dencic",
     "position" : {
-      "id": 1,
       "color" : "aquamarine",
+      "id" : 1,
       "name" : "Developer"
     }
   }, {
@@ -15,8 +15,8 @@
     "id" : 2,
     "last_name" : "Dencic",
     "position" : {
-      "id": 2,
       "color" : "bisque",
+      "id" : 2,
       "name" : "Manager"
     }
   } ],
@@ -28,8 +28,8 @@
       "id" : 1,
       "last_name" : "Dencic",
       "position" : {
-        "id": 1,
         "color" : "aquamarine",
+        "id" : 1,
         "name" : "Developer"
       }
     }, {
@@ -38,16 +38,16 @@
       "id" : 2,
       "last_name" : "Dencic",
       "position" : {
-        "id": 2,
         "color" : "bisque",
+        "id" : 2,
         "name" : "Manager"
       }
     } ],
     "id" : 1,
     "name" : "Shift1",
     "position" : {
-      "id": 1,
       "color" : "aquamarine",
+      "id" : 1,
       "name" : "Developer"
     }
   }, {
@@ -58,16 +58,16 @@
       "id" : 1,
       "last_name" : "Dencic",
       "position" : {
-        "id": 1,
         "color" : "aquamarine",
+        "id" : 1,
         "name" : "Developer"
       }
     } ],
     "id" : 2,
     "name" : "Shift2",
     "position" : {
-      "id": 1,
       "color" : "aquamarine",
+      "id" : 1,
       "name" : "Developer"
     }
   }, {
@@ -78,16 +78,16 @@
       "id" : 2,
       "last_name" : "Dencic",
       "position" : {
-        "id" : 2,
         "color" : "bisque",
+        "id" : 2,
         "name" : "Manager"
       }
     } ],
     "id" : 3,
     "name" : "Shift3",
     "position" : {
-      "id" : 2,
       "color" : "bisque",
+      "id" : 2,
       "name" : "Manager"
     }
   }, {
@@ -98,16 +98,16 @@
       "id" : 2,
       "last_name" : "Dencic",
       "position" : {
-        "id" : 2,
         "color" : "bisque",
+        "id" : 2,
         "name" : "Manager"
       }
     } ],
     "id" : 4,
     "name" : "Shift4",
     "position" : {
-      "id" : 2,
       "color" : "bisque",
+      "id" : 2,
       "name" : "Manager"
     }
   } ]
