@@ -59,6 +59,8 @@ export default employees;
 export const getById = state => state.employees.byId;
 // $FlowFixMe
 export const getIds = state => state.employees.ids;
+// $FlowFixMe
+export const getErrorMessage = state => state.employees.errorMessage;
 
 export const getEmployees = createSelector([getIds, getById], (allIds, allbById) =>
   allIds.map(id => allbById[id]));

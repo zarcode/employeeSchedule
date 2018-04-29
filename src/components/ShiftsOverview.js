@@ -9,10 +9,12 @@ import { shiftsLoading } from '../actions/shifts';
 import { employeesLoading } from '../actions/employees';
 import {
   getShifts,
-  // getErrorMessage,
-  // getLoadingState,
+  getErrorMessage as getShiftsErrorMessage,
 } from '../reducers/shifts';
-import { getEmployees } from '../reducers/employees';
+import {
+  getEmployees,
+  getErrorMessage as getEmployeesErrorMessage,
+} from '../reducers/employees';
 
 import ShiftsTable from './ShiftsTable';
 import TableNavigation from './TableNavigation';
@@ -60,8 +62,8 @@ class ShiftsOverview extends Component<Props, State> {
 
   componentWillReceiveProps(nextProps) {
     // @todo better error handling
-    if (this.props.errorMessage) {
-      alert(this.props.errorMessage);
+    if (nextProps.errorMessage) {
+      alert(nextProps.errorMessage);
     }
     if (nextProps.cDate !== this.props.cDate) {
       this.loadMore(nextProps.cDate);
@@ -117,6 +119,7 @@ const mapStateToProps = (state, ownProps) => {
     cDate,
     shifts: getShifts(state, startDate),
     employees: getEmployees(state),
+    errorMessage: getEmployeesErrorMessage(state) || getShiftsErrorMessage(state),
   };
 };
 
