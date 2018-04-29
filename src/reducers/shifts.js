@@ -15,9 +15,8 @@ const byId = (state = {}, action) => {
 
 const ids = (state = {}, action) => {
   if (action.type === ACTION.FETCH_SHIFTS_SUCCESS) {
-    const oldState = state[action.startDate];
     return {
-      ...oldState,
+      ...state,
       [action.startDate]: action.response.result,
     };
   }

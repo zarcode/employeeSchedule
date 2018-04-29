@@ -16,10 +16,24 @@ const byId = (state = {}, action) => {
 };
 
 const ids = (state = [], action) => {
-  if (action.type === ACTION.FETCH_EMPLOYEES_SUCCESS) {
-    return [...state, ...action.response.result];
+  switch (action.type) {
+    case ACTION.FETCH_EMPLOYEES_SUCCESS:
+      // new Set - for unique array merge
+      return [...new Set([
+        ...state,
+        ...action.response.result,
+      ])];
+    case ACTION.FETCH_SHIFTS_SUCCESS:
+      // new Set - for unique array merge
+      return [...new Set([
+        ...state,
+        ...Object.keys(action.response.entities.employees)
+          // if ids from REST are numbers its better to convert the key value into a number
+          .map(x => Number(x)),
+      ])];
+    default:
+      return state;
   }
-  return state;
 };
 
 const isFetching = (state = false, action) => {

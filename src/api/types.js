@@ -6,6 +6,7 @@ export type PromiseCancel<T> = {
 };
 
 export type Position = {
+  id: number,
   name: string,
   color: string,
 };

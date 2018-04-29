@@ -1,6 +1,10 @@
 import { schema } from 'normalizr';
 
-const employee = new schema.Entity('employees');
+const position = new schema.Entity('positions');
+
+const employee = new schema.Entity('employees', {
+  position,
+});
 export const employees = [employee];
 
 const shift = new schema.Entity('shifts', {

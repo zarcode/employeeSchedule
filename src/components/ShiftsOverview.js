@@ -15,6 +15,9 @@ import {
   getEmployees,
   getErrorMessage as getEmployeesErrorMessage,
 } from '../reducers/employees';
+import {
+  getPositions,
+} from '../reducers/positions';
 
 import ShiftsTable from './ShiftsTable';
 import TableNavigation from './TableNavigation';
@@ -22,7 +25,7 @@ import EmployeesFilter from './EmployeesFilter';
 
 import { DATE_FORMATS } from '../constants';
 
-import type { Employee, Shift } from '../api/types';
+import type { Employee, Shift, Position } from '../api/types';
 
 import styles from './ShiftsOverview.css';
 
@@ -32,6 +35,7 @@ type Props = {
   cDate: string,
   shifts: Array<Shift>,
   employees: Array<Employee>,
+  positions: Array<Position>,
   errorMessage: string,
   actions: {
     employeesLoading: () => void,
@@ -82,7 +86,6 @@ class ShiftsOverview extends Component<Props, State> {
   };
 
   render() {
-    // console.log('render');
     // if (this.props.employees.length === 0) {
     //   return <div>Loading</div>;
     // }
@@ -104,6 +107,7 @@ class ShiftsOverview extends Component<Props, State> {
           startDate={this.state.tableStartDate}
           employees={employees}
           shifts={this.props.shifts}
+          positions={this.props.positions}
         />
       </div>
     );
@@ -119,6 +123,7 @@ const mapStateToProps = (state, ownProps) => {
     cDate,
     shifts: getShifts(state, startDate),
     employees: getEmployees(state),
+    positions: getPositions(state),
     errorMessage: getEmployeesErrorMessage(state) || getShiftsErrorMessage(state),
   };
 };
