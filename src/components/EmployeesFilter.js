@@ -8,7 +8,7 @@ type Props = {
   employees: Array<Employee>,
 };
 const EmployeesFilter = ({ onChange, employees }: Props) => (
-  <select name="" id="" onChange={onChange}>
+  <select name="employee" id="employee" onChange={onChange}>
     <option value="">All</option>
     {employees.map(employee => (
       <option key={employee.id} value={employee.id}>

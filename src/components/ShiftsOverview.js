@@ -96,7 +96,6 @@ class ShiftsOverview extends Component<Props, State> {
       }
       return true;
     });
-
     return (
       <div>
         <div className={styles.shiftsFitersNav}>

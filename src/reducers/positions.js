@@ -20,13 +20,16 @@ const ids = (state = [], action) => {
     action.type === ACTION.FETCH_EMPLOYEES_SUCCESS ||
     action.type === ACTION.FETCH_SHIFTS_SUCCESS
   ) {
-    // new Set - for unique array merge
-    return [...new Set([
-      ...state,
-      ...Object.keys(action.response.entities.positions)
-        // if ids from REST are numbers its better to convert the key value into a number
-        .map(x => Number(x)),
-    ])];
+    if ('positions' in action.response.entities) {
+      // new Set - for unique array merge
+      return [...new Set([
+        ...state,
+        ...Object.keys(action.response.entities.positions)
+          // since ids from REST are numbers its better to convert the key value into a number
+          .map(x => Number(x)),
+      ])];
+    }
+    return state;
   }
   return state;
 };
