@@ -11,11 +11,11 @@ type Props = {
   columns: Array<any>,
   columnKeyExtractor: (any) => string | number,
   renderColumnHeader: (any, number) => Element<any> | string | null,
-  renderFirstCell: () => Element<any> | string | null,
+  renderFirstCell?: () => Element<any> | string | null,
   renderCell: (any, number) => Element<any> | string | null,
   highLightCell: (number) => boolean,
 };
-const Table = ({
+const TimeTable = ({
   rows,
   rowKeyExtractor,
   renderRowHeader,
@@ -30,7 +30,7 @@ Props) => (
   <table className={styles.table}>
     <thead>
       <tr>
-        <th>{renderFirstCell()}</th>
+        <th>{renderFirstCell && renderFirstCell()}</th>
         {columns.map((columnItem, index) => (
           <th
             key={`th-${columnKeyExtractor(columnItem)}`}
@@ -59,4 +59,9 @@ Props) => (
   </table>
 );
 
-export default Table;
+TimeTable.defaultProps = {
+  renderFirstCell: () => null,
+};
+
+export default TimeTable;
+

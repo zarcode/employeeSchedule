@@ -14,7 +14,7 @@ export const shiftsLoading = (startDate: number, endDate: number): ShiftsAction 
 
 export const shiftsSuccess = (response: Array<Shift>, startDate: number): ShiftsAction => ({
   type: ACTION.FETCH_SHIFTS_SUCCESS,
-  response: normalize(response, schema.shifts), // todo fix REST response
+  response: normalize(response, schema.shifts),
   startDate,
 });
 

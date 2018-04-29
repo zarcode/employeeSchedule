@@ -65,9 +65,8 @@ class ShiftsOverview extends Component<Props, State> {
   }
 
   componentWillReceiveProps(nextProps) {
-    // @todo better error handling
     if (nextProps.errorMessage) {
-      alert(nextProps.errorMessage);
+      alert(nextProps.errorMessage); // eslint-disable-line no-alert
     }
     if (nextProps.cDate !== this.props.cDate) {
       this.loadMore(nextProps.cDate);
@@ -86,9 +85,6 @@ class ShiftsOverview extends Component<Props, State> {
   };
 
   render() {
-    // if (this.props.employees.length === 0) {
-    //   return <div>Loading</div>;
-    // }
     const { cDate } = this.props;
     const employees = this.props.employees.filter((x) => {
       if (this.state.employeeFilterValue) {

@@ -2,6 +2,7 @@
 import { createSelector } from 'reselect';
 import { combineReducers } from 'redux';
 import { ACTION } from '../constants';
+import type { ReduxState } from './';
 
 const byId = (state = {}, action) => {
   if (action.type === ACTION.FETCH_SHIFTS_SUCCESS) {
@@ -56,14 +57,13 @@ const shifts = combineReducers({
 
 export default shifts;
 
-// $FlowFixMe
-export const getById = state => state.shifts.byId;
-// $FlowFixMe
-export const getIds = (state, startDate) => state.shifts.ids[startDate];
-// $FlowFixMe
-export const getIsFetching = state => state.shifts.isFetching;
-// $FlowFixMe
-export const getErrorMessage = state => state.shifts.errorMessage;
+export const getById = (state: ReduxState) => state.shifts.byId;
+
+export const getIds = (state: ReduxState, startDate: string) => state.shifts.ids[startDate];
+
+export const getIsFetching = (state: ReduxState) => state.shifts.isFetching;
+
+export const getErrorMessage = (state: ReduxState) => state.shifts.errorMessage;
 
 export const getShifts = createSelector([getIds, getById], (allIds, allbById) => {
   if (allIds) {

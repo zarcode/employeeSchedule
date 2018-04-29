@@ -29,13 +29,13 @@ export type EmployeeViewModel = {
   avatar: string,
 }
 
-const employeeToViewModel = function (employee: Employee): EmployeeViewModel {
+function employeeToViewModel(employee: Employee): EmployeeViewModel {
   return {
     firstName: get(employee, 'first_name', ''),
     lastName: get(employee, 'last_name', ''),
     avatar: get(employee, 'avatar', ''),
   };
-};
+}
 
 class ShiftsTable extends Component<Props> {
   componentWillUpdate(nextProps: Props) {
@@ -46,13 +46,9 @@ class ShiftsTable extends Component<Props> {
 
   today: string;
 
-  extractEmployeeKey = function (employee: Employee) {
-    return employee.id;
-  };
+  extractEmployeeKey = (employee: Employee) => employee.id;
 
-  extractDaysKey = function (day: string) {
-    return day;
-  };
+  extractDaysKey = (day: string) => day;
 
   highLightCell = (index: number) => this.today ===
       moment(this.props.startDate, APP_FORMAT)
@@ -63,13 +59,8 @@ class ShiftsTable extends Component<Props> {
       .add(index, 'days')
       .format(PREVIEW_FORMAT)}`;
 
-  renderRowHeader = function (employee: Employee) {
-    return <EmployeeTableItem employee={employeeToViewModel(employee)} />;
-  };
-
-  renderFirstCell = function () {
-    return null;
-  };
+  renderRowHeader = (employee: Employee) =>
+    <EmployeeTableItem employee={employeeToViewModel(employee)} />;
 
   renderCell = (employee: Employee, dayNumber: number) => {
     const dayShifts = this.props.shifts.filter(shift =>

@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect';
 import { combineReducers } from 'redux';
 import { ACTION } from '../constants';
+import type { ReduxState } from './index';
 
 const byId = (state = {}, action) => {
   if (
@@ -72,12 +73,11 @@ const employees = combineReducers({
 
 export default employees;
 
-// $FlowFixMe
-export const getById = state => state.employees.byId;
-// $FlowFixMe
-export const getIds = state => state.employees.ids;
-// $FlowFixMe
-export const getErrorMessage = state => state.employees.errorMessage;
+export const getById = (state: ReduxState) => state.employees.byId;
+
+export const getIds = (state: ReduxState) => state.employees.ids;
+
+export const getErrorMessage = (state: ReduxState) => state.employees.errorMessage;
 
 export const getEmployees = createSelector([getIds, getById], (allIds, allbById) =>
   allIds.map(id => allbById[id]));

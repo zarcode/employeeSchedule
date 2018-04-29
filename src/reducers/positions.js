@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect';
 import { combineReducers } from 'redux';
 import { ACTION } from '../constants';
+import type { ReduxState } from './index';
 
 const byId = (state = {}, action) => {
   if (
@@ -41,10 +42,9 @@ const positions = combineReducers({
 
 export default positions;
 
-// $FlowFixMe
-export const getById = state => state.positions.byId;
-// $FlowFixMe
-export const getIds = state => state.positions.ids;
+export const getById = (state: ReduxState) => state.positions.byId;
+
+export const getIds = (state: ReduxState) => state.positions.ids;
 
 export const getPositions = createSelector([getIds, getById], (allIds, allbById) =>
   allIds.map(id => allbById[id]));
