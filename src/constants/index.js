@@ -14,3 +14,5 @@ export const DATE_FORMATS = {
   APP_FORMAT: 'YYYY-MM-DD',
   PREVIEW_FORMAT: 'MMM D',
 };
+
+export const WEEKDAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];

@@ -10,13 +10,11 @@ import EmployeeTableItem from './EmployeeTableItem';
 
 import type { Employee, Shift, Position } from '../../api/types';
 
-import { DATE_FORMATS } from '../../constants/index';
+import { DATE_FORMATS, WEEKDAYS } from '../../constants/index';
 
 const get = require('lodash/get');
 
 const { APP_FORMAT, PREVIEW_FORMAT } = DATE_FORMATS;
-
-const weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
 type Props = {
   startDate: string,
@@ -40,7 +38,7 @@ function employeeToViewModel(employee: Employee): EmployeeViewModel {
 }
 
 function getWeekDates(startDate, dateFormat) {
-  return weekDays
+  return WEEKDAYS
     .map((day, index) => index)
     .map(index => addDays(new Date(startDate), index))
     .map(date => format(date, dateFormat));
@@ -93,7 +91,7 @@ class ShiftsTable extends Component<Props> {
         rows={this.props.employees}
         rowKeyExtractor={this.extractEmployeeKey}
         renderRowHeader={this.renderRowHeader}
-        columns={weekDays}
+        columns={WEEKDAYS}
         columnKeyExtractor={this.extractDaysKey}
         renderColumnHeader={this.renderColumnHeader}
         renderCell={this.renderCell}
