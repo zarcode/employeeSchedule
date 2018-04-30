@@ -55,7 +55,7 @@ class ShiftsOverview extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      tableStartDate: '',
+      tableStartDate: format(startOfWeek(new Date(props.cDate), { weekStartsOn: 1 }), APP_FORMAT),
       employeeFilterValue: '',
     };
   }

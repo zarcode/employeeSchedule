@@ -39,32 +39,45 @@ function employeeToViewModel(employee: Employee): EmployeeViewModel {
   };
 }
 
+function getWeekDates(startDate, dateFormat) {
+  return weekDays
+    .map((day, index) => index)
+    .map(index => addDays(new Date(startDate), index))
+    .map(date => format(date, dateFormat));
+}
+
 class ShiftsTable extends Component<Props> {
-  componentWillUpdate(nextProps: Props) {
+  constructor(props: Props) {
+    super(props);
+    this.today = format(new Date(), APP_FORMAT);
+    this.weekDates = getWeekDates(props.startDate, APP_FORMAT);
+  }
+
+  componentWillReceiveProps(nextProps: Props) {
     if (nextProps.startDate !== this.props.startDate) {
       this.today = format(new Date(), APP_FORMAT);
+      this.weekDates = getWeekDates(nextProps.startDate, APP_FORMAT);
     }
   }
 
   today: string;
+  weekDates: Array<string>;
 
   extractEmployeeKey = (employee: Employee) => employee.id;
 
   extractDaysKey = (day: string) => day;
 
-  highLightCell = (index: number) => this.today ===
-      format(addDays(new Date(this.props.startDate), index), APP_FORMAT);// todo can be improved
+  highLightCell = (index: number) => this.today === this.weekDates[index];
 
   renderColumnHeader = (columnItem: string, index: number) =>
-    `${columnItem}, ${format(addDays(new Date(this.props.startDate), index), PREVIEW_FORMAT)}`; // todo can be improved
+    `${columnItem}, ${getWeekDates(this.props.startDate, PREVIEW_FORMAT)[index]}`;
 
   renderRowHeader = (employee: Employee) =>
     <EmployeeTableItem employee={employeeToViewModel(employee)} />;
 
   renderCell = (employee: Employee, dayNumber: number) => {
     const dayShifts = this.props.shifts.filter(shift =>
-      shift.date ===
-      format(addDays(new Date(this.props.startDate), dayNumber), APP_FORMAT) // todo can be improved
+      shift.date === this.weekDates[dayNumber]
       && shift.employees.indexOf(employee.id) > -1);
 
     return (
