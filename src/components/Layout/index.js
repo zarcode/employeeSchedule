@@ -15,7 +15,7 @@ const Layout = () => (
         className={styles.loadingBar}
       />
       <div className={styles.layout}>
-        <Route path="/overview/:date?" component={ShiftsOverview} />
+        <Route path="/:date?" component={ShiftsOverview} />
       </div>
     </div>
   </Router>

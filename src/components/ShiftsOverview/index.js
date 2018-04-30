@@ -99,7 +99,7 @@ class ShiftsOverview extends Component<Props, State> {
     return (
       <div>
         <div className={styles.shiftsFitersNav}>
-          <TableNavigation path="/overview/" current={cDate} stepValue={7} />
+          <TableNavigation path="/" current={cDate} stepValue={7} />
           <EmployeesFilter employees={this.props.employees} onChange={this.filterEmployees} />
         </div>
         <ShiftsTable
