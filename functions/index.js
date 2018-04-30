@@ -21,8 +21,8 @@ exports.shifts = functions.https.onRequest(function(request, response) {
     let startDate;
     let endDate;
     if ('startDate' in request.query && 'endDate' in request.query) {
-      startDate = Number(request.query.startDate);
-      endDate = Number(request.query.endDate);
+      startDate = request.query.startDate;
+      endDate = request.query.endDate;
     } else {
       response.status(500).send({ message: "Required params are not provided" });
     }
@@ -43,8 +43,8 @@ exports.allshifts = functions.https.onRequest(function(request, response) {
     let startDate;
     let endDate;
     if ('startDate' in request.query && 'endDate' in request.query) {
-      startDate = Number(request.query.startDate);
-      endDate = Number(request.query.endDate);
+      startDate = request.query.startDate;
+      endDate = request.query.endDate;
     } else {
       response.status(500).send({ message: "Required params are not provided" });
     }

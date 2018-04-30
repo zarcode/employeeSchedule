@@ -2,8 +2,11 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as moment from 'moment';
 import { bindActionCreators } from 'redux';
+import format from 'date-fns/format';
+import startOfWeek from 'date-fns/start_of_week';
+import endOfWeek from 'date-fns/end_of_week';
+import isValid from 'date-fns/is_valid';
 
 import { shiftsLoading } from '../../actions/shifts';
 import { employeesLoading } from '../../actions/employees';
@@ -39,7 +42,7 @@ type Props = {
   errorMessage: string,
   actions: {
     employeesLoading: () => void,
-    shiftsLoading: (startDate: number, endDate: number) => void,
+    shiftsLoading: (startDate: string, endDate: string) => void,
   },
 };
 
@@ -74,10 +77,11 @@ class ShiftsOverview extends Component<Props, State> {
   }
 
   loadMore = (cDate) => {
-    const startDate = moment(cDate, APP_FORMAT).startOf('isoWeek');
-    const endDate = moment(cDate, APP_FORMAT).endOf('isoWeek');
-    this.setState({ tableStartDate: startDate.format(APP_FORMAT) });
-    this.props.actions.shiftsLoading(startDate.valueOf(), endDate.valueOf());
+    const currentDate = new Date(cDate);
+    const startDate = format(startOfWeek(currentDate, { weekStartsOn: 1 }), APP_FORMAT);
+    const endDate = format(endOfWeek(currentDate, { weekStartsOn: 1 }), APP_FORMAT);
+    this.setState({ tableStartDate: startDate });
+    this.props.actions.shiftsLoading(startDate, endDate);
   };
 
   filterEmployees = (e: SyntheticInputEvent<HTMLInputElement>) => {
@@ -95,7 +99,7 @@ class ShiftsOverview extends Component<Props, State> {
     return (
       <div>
         <div className={styles.shiftsFitersNav}>
-          <TableNavigation path="/overview/" current={cDate} stepValue={7} step="days" />
+          <TableNavigation path="/overview/" current={cDate} stepValue={7} />
           <EmployeesFilter employees={this.props.employees} onChange={this.filterEmployees} />
         </div>
         <ShiftsTable
@@ -110,10 +114,12 @@ class ShiftsOverview extends Component<Props, State> {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const cDate = ownProps.match.params.date || moment().format(APP_FORMAT);
-  const startDate = moment(cDate, APP_FORMAT)
-    .startOf('isoWeek')
-    .valueOf();
+  const dateFromProps = new Date(ownProps.match.params.date);
+  let cDate = format(new Date(), APP_FORMAT); // default to today
+  if (ownProps.match.params.date && isValid(dateFromProps)) {
+    cDate = format(dateFromProps, APP_FORMAT);
+  }
+  const startDate = format(startOfWeek(cDate, { weekStartsOn: 1 }), APP_FORMAT);
   return {
     cDate,
     shifts: getShifts(state, startDate),

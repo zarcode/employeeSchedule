@@ -1,7 +1,8 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import * as moment from 'moment';
+import format from 'date-fns/format';
+import addDays from 'date-fns/add_days';
 
 import Table from '../shared/TimeTable';
 import ShiftsCell from './ShiftsCell';
@@ -14,6 +15,7 @@ import { DATE_FORMATS } from '../../constants/index';
 const get = require('lodash/get');
 
 const { APP_FORMAT, PREVIEW_FORMAT } = DATE_FORMATS;
+
 const weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
 type Props = {
@@ -40,7 +42,7 @@ function employeeToViewModel(employee: Employee): EmployeeViewModel {
 class ShiftsTable extends Component<Props> {
   componentWillUpdate(nextProps: Props) {
     if (nextProps.startDate !== this.props.startDate) {
-      this.today = moment().format(APP_FORMAT);
+      this.today = format(new Date(), APP_FORMAT);
     }
   }
 
@@ -51,23 +53,19 @@ class ShiftsTable extends Component<Props> {
   extractDaysKey = (day: string) => day;
 
   highLightCell = (index: number) => this.today ===
-      moment(this.props.startDate, APP_FORMAT)
-        .add(index, 'days').format(APP_FORMAT);
+      format(addDays(new Date(this.props.startDate), index), APP_FORMAT);// todo can be improved
 
   renderColumnHeader = (columnItem: string, index: number) =>
-    `${columnItem}, ${moment(this.props.startDate, APP_FORMAT)
-      .add(index, 'days')
-      .format(PREVIEW_FORMAT)}`;
+    `${columnItem}, ${format(addDays(new Date(this.props.startDate), index), PREVIEW_FORMAT)}`; // todo can be improved
 
   renderRowHeader = (employee: Employee) =>
     <EmployeeTableItem employee={employeeToViewModel(employee)} />;
 
   renderCell = (employee: Employee, dayNumber: number) => {
     const dayShifts = this.props.shifts.filter(shift =>
-      parseInt(shift.date, 10) ===
-          moment(this.props.startDate, APP_FORMAT)
-            .add(dayNumber, 'days')
-            .valueOf() && shift.employees.indexOf(employee.id) > -1);
+      shift.date ===
+      format(addDays(new Date(this.props.startDate), dayNumber), APP_FORMAT) // todo can be improved
+      && shift.employees.indexOf(employee.id) > -1);
 
     return (
       <ShiftsCell

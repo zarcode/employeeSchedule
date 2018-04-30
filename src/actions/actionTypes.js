@@ -2,8 +2,8 @@
 export type ShiftsAction =
   | {
       type: 'FETCH_SHIFTS_LOADING',
-      startDate: number,
-      endDate: number,
+      startDate: string,
+      endDate: string,
     }
   | {
       type: 'FETCH_SHIFTS_FAIL',
@@ -18,7 +18,7 @@ export type ShiftsAction =
         },
         result: Array<number>,
       },
-      startDate: number,
+      startDate: string,
     };
 
 export type EmployeesAction =

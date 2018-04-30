@@ -11,6 +11,6 @@ export const ACTION = {
 };
 
 export const DATE_FORMATS = {
-  APP_FORMAT: 'MM-DD-YYYY',
+  APP_FORMAT: 'YYYY-MM-DD',
   PREVIEW_FORMAT: 'MMM D',
 };

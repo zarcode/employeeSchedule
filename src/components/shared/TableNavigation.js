@@ -1,5 +1,7 @@
 import React from 'react';
-import * as moment from 'moment';
+import format from 'date-fns/format';
+import addDays from 'date-fns/add_days';
+import subDays from 'date-fns/sub_days';
 import { Link } from 'react-router-dom';
 import { DATE_FORMATS } from '../../constants/index';
 
@@ -11,19 +13,14 @@ type Props = {
   path: string,
   current: string,
   stepValue: number,
-  step: string,
 }
 const TableNavigation = ({
-  path, current, stepValue, step,
+  path, current, stepValue,
 }:
 Props) => {
-  const today = moment().format(APP_FORMAT);
-  const prev = moment(current, APP_FORMAT)
-    .subtract(stepValue, step)
-    .format(APP_FORMAT);
-  const next = moment(current, APP_FORMAT)
-    .add(stepValue, step)
-    .format(APP_FORMAT);
+  const today = format(new Date(), APP_FORMAT);
+  const prev = format(subDays(new Date(current), stepValue), APP_FORMAT);
+  const next = format(addDays(new Date(current), stepValue), APP_FORMAT);
   return (
     <div className={styles.filters}>
       <Link className={styles.button} href={`${path}${prev}`} to={`${path}${prev}`}>
