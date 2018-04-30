@@ -22,4 +22,4 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 From firebase database, that is used as REST API.
 Check https://github.com/zarcode/employeeSchedule/blob/master/src/dummy.json
-for more details on how date is saved to the database.
+for more details on how data is structured.

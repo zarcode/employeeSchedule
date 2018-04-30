@@ -31,13 +31,13 @@ function requestGet<T>({ url, params }): PromiseCancel<T> {
 class ApiIml implements Api {
   fetchShifts = (params: FetchShiftsParams): PromiseCancel<Array<Shift>> =>
     requestGet({
-      url: `${config.url}/shifts`,
+      url: `${config.url}/shifts.json`,
       params,
     });
 
   fetchEmployees = (params: FetchEmployeesParams): PromiseCancel<Array<Employee>> =>
     requestGet({
-      url: `${config.url}/employees`,
+      url: `${config.url}/employees.json`,
       params,
     });
 }

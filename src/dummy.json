@@ -21,7 +21,7 @@
     }
   } ],
   "shifts" : [ {
-    "date" : 1524693600000,
+    "date" : "2018-04-26",
     "employees" : [ {
       "avatar" : "",
       "first_name" : "Zarko",
@@ -51,7 +51,7 @@
       "name" : "Developer"
     }
   }, {
-    "date" : 1525125600000,
+    "date" : "2018-05-01",
     "employees" : [ {
       "avatar" : "",
       "first_name" : "Zarko",
@@ -71,7 +71,7 @@
       "name" : "Developer"
     }
   }, {
-    "date" : 1524780000000,
+    "date" : "2018-04-27",
     "employees" : [ {
       "avatar" : "https://api.adorable.io/avatars/120/abott@adorable.png",
       "first_name" : "Tamara",
@@ -91,7 +91,7 @@
       "name" : "Manager"
     }
   }, {
-    "date" : 1525471200000,
+    "date" : "2018-05-03",
     "employees" : [ {
       "avatar" : "https://api.adorable.io/avatars/120/abott@adorable.png",
       "first_name" : "Tamara",
@@ -105,6 +105,56 @@
     } ],
     "id" : 4,
     "name" : "Shift4",
+    "position" : {
+      "color" : "bisque",
+      "id" : 2,
+      "name" : "Manager"
+    }
+  }, {
+    "date" : "2018-05-09",
+    "employees" : [ {
+      "avatar" : "",
+      "first_name" : "Zarko",
+      "id" : 1,
+      "last_name" : "Dencic",
+      "position" : {
+        "color" : "aquamarine",
+        "id" : 1,
+        "name" : "Developer"
+      }
+    }, {
+      "avatar" : "https://api.adorable.io/avatars/120/abott@adorable.png",
+      "first_name" : "Tamara",
+      "id" : 2,
+      "last_name" : "Dencic",
+      "position" : {
+        "color" : "bisque",
+        "id" : 2,
+        "name" : "Manager"
+      }
+    } ],
+    "id" : 5,
+    "name" : "Shift5",
+    "position" : {
+      "color" : "aquamarine",
+      "id" : 1,
+      "name" : "Developer"
+    }
+  }, {
+    "date" : "2018-05-05",
+    "employees" : [ {
+      "avatar" : "https://api.adorable.io/avatars/120/abott@adorable.png",
+      "first_name" : "Tamara",
+      "id" : 2,
+      "last_name" : "Dencic",
+      "position" : {
+        "color" : "bisque",
+        "id" : 2,
+        "name" : "Manager"
+      }
+    } ],
+    "id" : 6,
+    "name" : "Shift6",
     "position" : {
       "color" : "bisque",
       "id" : 2,

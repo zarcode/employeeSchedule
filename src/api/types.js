@@ -28,8 +28,9 @@ export type Shift = {
 };
 
 export type FetchShiftsParams = {
-  startDate: string,
-  endDate: string,
+  orderBy: ?string,
+  startAt?: ?string,
+  endAt: ?string,
 };
 
 export type FetchEmployeesParams = {};
