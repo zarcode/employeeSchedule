@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import LoadingBar from 'react-redux-loading-bar';
 import ShiftsOverview from '../ShiftsOverview';
 
@@ -15,7 +15,8 @@ const Layout = () => (
         className={styles.loadingBar}
       />
       <div className={styles.layout}>
-        <Route path="/:date?" component={ShiftsOverview} />
+        <Redirect from="/" to="/employeeSchedule/" />
+        <Route path="/employeeSchedule/:date?" component={ShiftsOverview} />
       </div>
     </div>
   </Router>
